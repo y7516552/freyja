@@ -15,6 +15,7 @@ export interface IUser extends Document {
         city: string;
     };
     verificationToken: string;
+    role:string;
 }
 
 const userSchema = new Schema<IUser>(
@@ -72,6 +73,10 @@ const userSchema = new Schema<IUser>(
             type: String,
             default: '',
             select: false
+        },
+        role:{
+            type: String,
+            default: 'user',
         }
     },
     {

@@ -74,6 +74,17 @@ const getTransporter = async () => {
             user: EMAILER_USER,
             pass: EMAILER_PASSWORD
         }
+        // host: 'smtp.gmail.com',
+        // port: 465,
+        // secure: true,
+        // auth: {
+        //   type: "OAuth2",
+        //   user: process.env.EMAILER_ACCOUNT,
+        //   clientId: process.env.EMAILER_CLINENTID,
+        //   clientSecret: process.env.EMAILER_CLINENTSECRET,
+        //   refreshToken: process.env.EMAILER_REFRESHTOKEN,
+        //   accessToken: process.env.EMAILER_ACCESSTOKEN,
+        // }
     });
 
     await transporter.verify();

@@ -11,10 +11,9 @@ declare global {
             JWT_EXPIRES_DAY: string;
             JWT_SECRET: string;
 
-            EMAILER_USER: string;
-            EMAILER_PASSWORD: string;
-
-            NODE_ENV: 'development' | 'production';
+            EMAILER_USER: string;            
+            EMAILER_PASSWORD: string;            
+            NODE_ENV: 'development' | 'production';         
         }
     }
 
