@@ -4,8 +4,6 @@ import validator from 'validator';
 import RoomModel from '@/models/room';
 import UsersModel from '@/models/user';
 import { verifyToken } from '@/utils';
-import multer from 'multer';
-import path from 'path';
 
 // token 驗證
 export const isAuth: RequestHandler = async (req, _res, next) => {
@@ -136,19 +134,3 @@ export const checkOrder: RequestHandler = async (req, _res, next) => {
         next(error);
     }
 };
-
-
-export const upload = multer({
-    limits: {
-      fileSize: 2 * 1024 * 1024,
-    },
-    fileFilter(req, file, cb) {
-        console.log('req',req)
-        console.log('file',file)
-      const ext = path.extname(file.originalname).toLowerCase();
-      if (ext !== '.jpg' && ext !== '.png' && ext !== '.jpeg') {
-        cb(new Error('檔案格式錯誤，僅限上傳 jpg、jpeg 與 png 格式。'));
-      }
-      cb(null, true);
-    },
-  }).any();
