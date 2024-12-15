@@ -4,7 +4,6 @@ import culinaryRouter from './culinary';
 import newsRouter from './news';
 import ordersRouter from './orders';
 import roomsRouter from './rooms';
-import imagesRouter from './images';
 
 const router = Router();
 
@@ -42,9 +41,5 @@ router.use(
     ordersRouter
 );
 
-router.use(
-    '/images',
-    imagesRouter
-);
 
 export default router;
