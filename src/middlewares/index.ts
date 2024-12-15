@@ -35,7 +35,7 @@ export const isAuth: RequestHandler = async (req, _res, next) => {
 };
 
 // TODO:實作管理員權限
-export const isAdmin: RequestHandler = async (req, res, next) => {
+export const isAdmin: RequestHandler = async (req, _res, next) => {
     /**
      * #swagger.security = [{ "bearerAuth": [] }]
      * #swagger.responses[403] = {
@@ -46,7 +46,24 @@ export const isAdmin: RequestHandler = async (req, res, next) => {
             }
         }
      */
-    isAuth(req, res, next);
+        try {
+            const token = `${req.headers.authorization?.replace('Bearer ', '')}`;
+            const result = verifyToken(token);
+    
+            const user = await UsersModel.findById(result.userId);
+            if (!user) {
+                throw createHttpError(404, '此使用者不存在');
+            }
+            
+            if(user.role!=='admin'){
+                throw createHttpError(403, '此使用者沒有權限');
+            }
+            req.user ??= user;
+    
+            next();
+        } catch (error) {
+            next(error);
+        }
 };
 
 export const checkRequestBodyValidator: RequestHandler = (req, _res, next) => {
